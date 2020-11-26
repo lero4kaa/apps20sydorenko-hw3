@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class FilterDecorator extends SmartArrayDecorator {
 
     MyPredicate predicate;
+
     public FilterDecorator(SmartArray sa, MyPredicate mp) {
         super(sa);
         this.predicate = mp;
@@ -19,7 +20,7 @@ public class FilterDecorator extends SmartArrayDecorator {
         int resultSize = this.smartArray.size();
         for (int i = 0; i < resultSize; i++) {
             if (!this.predicate.test(tempArray[i])) {
-                tempArray[i] = tempArray[resultSize-1];
+                tempArray[i] = tempArray[resultSize - 1];
                 resultSize -= 1;
                 i -= 1;
             }

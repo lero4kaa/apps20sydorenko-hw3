@@ -8,6 +8,7 @@ import java.util.Arrays;
 public class SortDecorator extends SmartArrayDecorator {
 
     MyComparator comparator;
+
     public SortDecorator(SmartArray sa, MyComparator mc) {
         super(sa);
         this.comparator = mc;

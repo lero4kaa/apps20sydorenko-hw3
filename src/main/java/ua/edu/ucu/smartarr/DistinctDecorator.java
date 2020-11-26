@@ -16,10 +16,10 @@ public class DistinctDecorator extends SmartArrayDecorator {
         Object[] tempArr = Arrays.copyOf(sa.toArray(), sa.size());
         int resultSize = sa.size();
 
-        for (int i = 0; i < resultSize; i ++) {
-            for (int j = i+1; j < resultSize; j ++) {
+        for (int i = 0; i < resultSize; i++) {
+            for (int j = i + 1; j < resultSize; j++) {
                 if (tempArr[i].equals(tempArr[j])) {
-                    tempArr[j] = tempArr[resultSize-1];
+                    tempArr[j] = tempArr[resultSize - 1];
                     resultSize -= 1;
                     j -= 1;
                 }

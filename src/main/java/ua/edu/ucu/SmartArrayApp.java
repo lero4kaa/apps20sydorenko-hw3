@@ -1,6 +1,7 @@
 package ua.edu.ucu;
 
 import java.util.Arrays;
+
 import ua.edu.ucu.functions.MyComparator;
 import ua.edu.ucu.functions.MyFunction;
 import ua.edu.ucu.functions.MyPredicate;
@@ -9,8 +10,8 @@ import ua.edu.ucu.smartarr.*;
 public class SmartArrayApp {
 
     public static Integer[]
-            filterPositiveIntegersSortAndMultiplyBy2(Integer[] integers) {
-                
+    filterPositiveIntegersSortAndMultiplyBy2(Integer[] integers) {
+
         MyPredicate pr = new MyPredicate() {
             @Override
             public boolean test(Object t) {
@@ -50,7 +51,10 @@ public class SmartArrayApp {
     }
 
     public static String[]
-            findDistinctStudentNamesFrom2ndYearWithGPAgt4AndOrderedBySurname(Student[] students) {
+    findDistinctStudentNamesFrom2ndYearWithGPAgt4AndOrderedBySurname(Student[] students) {
+
+        final double GPA = 4.0;
+        final int YEAR = 2;
 
         SmartArray sa = new BaseArray(students);
 
@@ -58,7 +62,7 @@ public class SmartArrayApp {
             @Override
             public boolean test(Object t) {
                 Student st = (Student) t;
-                return (st.getYear()) == 2;
+                return (st.getYear()) == YEAR;
             }
         };
 
@@ -66,16 +70,16 @@ public class SmartArrayApp {
             @Override
             public boolean test(Object t) {
                 Student st = (Student) t;
-                return (st.getGPA()) >= 4;
+                return (st.getGPA()) >= GPA;
             }
         };
 
         MyComparator cmp = new MyComparator() {
             @Override
             public int compare(Object o1, Object o2) {
-                Student st1 = (Student) o1;
-                Student st2 = (Student) o2;
-                return (st1.getSurname().compareTo(st2.getSurname()));
+                Student s1 = (Student) o1;
+                Student s2 = (Student) o2;
+                return (s1.getSurname().compareTo(s2.getSurname()));
             }
         };
 
@@ -83,7 +87,7 @@ public class SmartArrayApp {
             @Override
             public Object apply(Object t) {
                 Student st = (Student) t;
-                return st.getSurname()+" "+st.getName();
+                return st.getSurname() + " " + st.getName();
             }
         };
 
