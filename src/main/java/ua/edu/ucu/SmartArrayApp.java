@@ -4,6 +4,7 @@ import java.util.Arrays;
 import ua.edu.ucu.functions.MyComparator;
 import ua.edu.ucu.functions.MyFunction;
 import ua.edu.ucu.functions.MyPredicate;
+import ua.edu.ucu.smartarr.*;
 
 public class SmartArrayApp {
 
@@ -51,9 +52,48 @@ public class SmartArrayApp {
     public static String[]
             findDistinctStudentNamesFrom2ndYearWithGPAgt4AndOrderedBySurname(Student[] students) {
 
-        // Hint: to convert Object[] to String[] - use the following code
-        //Object[] result = studentSmartArray.toArray();
-        //return Arrays.copyOf(result, result.length, String[].class);
-        return null;
+        SmartArray sa = new BaseArray(students);
+
+        MyPredicate prYear = new MyPredicate() {
+            @Override
+            public boolean test(Object t) {
+                Student st = (Student) t;
+                return (st.getYear()) == 2;
+            }
+        };
+
+        MyPredicate prGPA = new MyPredicate() {
+            @Override
+            public boolean test(Object t) {
+                Student st = (Student) t;
+                return (st.getGPA()) >= 4;
+            }
+        };
+
+        MyComparator cmp = new MyComparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Student st1 = (Student) o1;
+                Student st2 = (Student) o2;
+                return (st1.getSurname().compareTo(st2.getSurname()));
+            }
+        };
+
+        MyFunction func = new MyFunction() {
+            @Override
+            public Object apply(Object t) {
+                Student st = (Student) t;
+                return st.getSurname()+" "+st.getName();
+            }
+        };
+
+        sa = new DistinctDecorator(sa);
+        sa = new FilterDecorator(sa, prYear);
+        sa = new FilterDecorator(sa, prGPA);
+        sa = new SortDecorator(sa, cmp);
+        sa = new MapDecorator(sa, func);
+        Object[] result = sa.toArray();
+        return Arrays.copyOf(result, result.length, String[].class);
+
     }
 }
