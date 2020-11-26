@@ -34,6 +34,7 @@ public class SmartArrayApp {
         };
 
         // Input: [-1, 2, 0, 1, -5, 3]
+
         SmartArray sa = new BaseArray(integers);
 
         sa = new FilterDecorator(sa, pr); // Result: [2, 1, 3];
@@ -96,6 +97,7 @@ public class SmartArrayApp {
         sa = new FilterDecorator(sa, prGPA);
         sa = new SortDecorator(sa, cmp);
         sa = new MapDecorator(sa, func);
+
         Object[] result = sa.toArray();
         return Arrays.copyOf(result, result.length, String[].class);
 
