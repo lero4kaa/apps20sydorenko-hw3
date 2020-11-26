@@ -8,7 +8,7 @@ public class Student {
     private String name;
     private String surname;
 
-    final double DIFF = 0.001;
+    static final double DIFF = 0.001;
 
     public Student(String name, String surname, double GPA, int year) {
         this.GPA = GPA;
@@ -48,14 +48,20 @@ public class Student {
             return false;
         }
         Student other = (Student) o;
-        if (this.name.equals(other.name) &&
-                this.surname.equals(other.surname) &&
-                ((this.GPA - other.GPA) < DIFF) &&
-                ((this.year - other.year) < DIFF)) {
+        if (this.name.equals(other.name)
+                && this.surname.equals(other.surname)
+                && ((this.GPA - other.GPA) < DIFF)
+                && ((this.year - other.year) < DIFF)) {
             return true;
         } else {
             return false;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        assert false: "hashCode not designed";
+        return 42;
     }
 
 }
